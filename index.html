@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farma Dexter | Kvalitní chov skotu</title>
     <style>
-        /* --- ZÁKLADNÍ NASTAVENÍ A PROMĚNNÉ --- */
+        /* --- ZÁKLADNÍ NASTAVENÍ --- */
         :root {
-            --primary-color: #2d6a4f; /* Tmavě zelená */
-            --secondary-color: #52b788; /* Světlejší zelená */
-            --accent-color: #bc6c25; /* Zemitá hnědá */
+            --primary-color: #2d6a4f;
+            --secondary-color: #52b788;
+            --accent-color: #bc6c25;
             --text-color: #333;
             --light-bg: #f4f9f4;
             --white: #ffffff;
             --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-main);
@@ -54,26 +50,13 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
 
-        .nav-links a {
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* --- HERO SEKCE (Úvodní banner) --- */
+        /* --- HERO SEKCE --- */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1920x1080/2d6a4f/ffffff?text=Farma+Dexter');
             background-size: cover;
@@ -87,19 +70,8 @@
             padding: 0 1rem;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
         .btn {
             background-color: var(--accent-color);
@@ -109,132 +81,57 @@
             font-weight: bold;
             transition: background 0.3s;
             display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
-
-        .btn:hover {
-            background-color: #a45a1c;
-        }
+        .btn:hover { background-color: #a45a1c; }
 
         /* --- OBECNÉ SEKCE --- */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; font-size: 2.5rem; color: var(--primary-color); margin-bottom: 3rem; }
 
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-        }
-
-        /* --- SEKCE O PLEMENI (Karty) --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
+        /* --- KARTY (O Plemeni) --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .feature-card {
-            background: var(--light-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-            transition: transform 0.3s;
+            background: var(--light-bg); padding: 2rem; border-radius: 10px;
+            text-align: center; border: 1px solid #e0e0e0; transition: transform 0.3s;
         }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
         /* --- GALERIE --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
         .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: opacity 0.3s;
+            width: 100%; height: 250px; object-fit: cover; border-radius: 8px;
+            cursor: pointer; transition: opacity 0.3s;
         }
-
-        .gallery-item img:hover {
-            opacity: 0.8;
-        }
+        .gallery-item img:hover { opacity: 0.8; }
 
         /* --- KONTAKTNÍ FORMULÁŘ --- */
         .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            background-color: var(--light-bg);
-            padding: 3rem;
-            border-radius: 15px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            background-color: var(--light-bg); padding: 3rem; border-radius: 15px;
         }
-
-        .contact-info h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .contact-info p {
-            margin-bottom: 0.5rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        input, textarea {
-            padding: 0.8rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: inherit;
-        }
-
-        textarea {
-            resize: vertical;
-        }
+        .contact-info h3 { margin-bottom: 1rem; color: var(--primary-color); }
+        .contact-info p { margin-bottom: 0.5rem; }
+        
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-group { display: flex; flex-direction: column; }
+        label { margin-bottom: 0.5rem; font-weight: 600; }
+        input, textarea { padding: 0.8rem; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        textarea { resize: vertical; }
 
         /* --- PATIČKA --- */
         footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            background-color: var(--primary-color); color: var(--white);
+            text-align: center; padding: 2rem; margin-top: 4rem;
         }
 
         /* --- RESPONZIVITA --- */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Zjednodušení pro demo - zde by byl hamburger menu */
+            .nav-links { display: none; }
             .contact-container { grid-template-columns: 1fr; }
         }
     </style>
@@ -257,15 +154,15 @@
     <section id="domu" class="hero">
         <div class="hero-content">
             <h1>Malé krávy, velký užitek</h1>
-            <p>Rodinná farma zaměřená na chov irského plemene Dexter v souladu s přírodou.</p>
-            <a href="#kontakt" class="btn">Mám zájem o maso / chov</a>
+            <p>Rodinná farma zaměřená na chov irského plemene Dexter s kombinovanou užitkovostí.</p>
+            <a href="#kontakt" class="btn">Napište nám</a>
         </div>
     </section>
 
     <section id="o-nas">
         <h2>Náš příběh</h2>
         <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-            <p>Jsme malá rodinná farma v podhůří, která věří, že kvalita je důležitější než kvantita. Náš skot se celoročně pase na volných loukách, což zaručuje nejen spokojený život zvířat, ale i prvotřídní kvalitu masa a mléka. Hospodaříme v režimu ekologického zemědělství.</p>
+            <p>Jsme malá rodinná farma v podhůří, která věří, že kvalita je důležitější než kvantita. Náš skot se celoročně pase na volných loukách. Hospodaříme s respektem k přírodě a zvířatům.</p>
         </div>
     </section>
 
@@ -274,18 +171,18 @@
         <div class="features-grid">
             <div class="feature-card">
                 <span class="feature-icon">🥩</span>
-                <h3>Excelentní maso</h3>
-                <p>Maso je jemně mramorované, křehké a má specifickou, výraznou chuť, kterou gurmáni vyhledávají.</p>
+                <h3>Maso</h3>
+                <p>Jemně mramorované, křehké maso s výraznou chutí, vyhledávané gurmány.</p>
             </div>
             <div class="feature-card">
                 <span class="feature-icon">🥛</span>
-                <h3>Kvalitní mléko</h3>
-                <p>Vysoký obsah tuku a bílkovin. Ideální pro výrobu domácích sýrů a mléčných výrobků.</p>
+                <h3>Mléko</h3>
+                <p>Vysoký obsah tuku a bílkovin, ideální pro domácí výrobu sýrů.</p>
             </div>
             <div class="feature-card">
                 <span class="feature-icon">🌱</span>
                 <h3>Nenáročnost</h3>
-                <p>Díky menšímu vzrůstu neničí pastviny a stačí jim méně krmiva než velkým plemenům.</p>
+                <p>Menší vzrůst znamená menší zátěž pro pastviny a nižší spotřebu krmiva.</p>
             </div>
         </div>
     </section>
@@ -293,9 +190,9 @@
     <section id="galerie">
         <h2>Život na farmě</h2>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://placehold.co/400x300/2d6a4f/ffffff?text=Kráva+na+pastvě" alt="Dexter na pastvě"></div>
-            <div class="gallery-item"><img src="https://placehold.co/400x300/52b788/ffffff?text=Tele" alt="Tele Dexter"></div>
-            <div class="gallery-item"><img src="https://placehold.co/400x300/bc6c25/ffffff?text=Naše+maso" alt="Maso"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/2d6a4f/ffffff?text=Kráva" alt="Dexter"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/52b788/ffffff?text=Tele" alt="Tele"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/bc6c25/ffffff?text=Pastva" alt="Pastva"></div>
             <div class="gallery-item"><img src="https://placehold.co/400x300/333/ffffff?text=Farma" alt="Farma"></div>
         </div>
     </section>
@@ -311,8 +208,6 @@
                 <br>
                 <p>📞 +420 123 456 789</p>
                 <p>✉️ info@farmadexter.cz</p>
-                <br>
-                <p><em>Osobní odběr masa je možný po telefonické domluvě.</em></p>
             </div>
 
             <form id="contactForm">
@@ -325,18 +220,10 @@
                     <input type="email" id="email" name="email" required placeholder="jan@novak.cz">
                 </div>
                 <div class="form-group">
-                    <label for="subject">Předmět</label>
-                    <select id="subject" name="subject">
-                        <option value="maso">Zájem o maso (bedýnky)</option>
-                        <option value="zvirata">Zájem o chovná zvířata</option>
-                        <option value="jine">Jiný dotaz</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="message">Zpráva</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Dobrý den, měl bych zájem o..."></textarea>
+                    <textarea id="message" name="message" rows="5" required placeholder="Vaše zpráva..."></textarea>
                 </div>
-                <button type="submit" class="btn">Odeslat zprávu</button>
+                <button type="submit" id="submitBtn" class="btn">Odeslat zprávu</button>
             </form>
         </div>
     </section>
@@ -347,14 +234,47 @@
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Zabrání skutečnému odeslání (reloadu) stránky
-            
-            // Zde by byl kód pro odeslání na server (např. přes PHP nebo službu jako Formspree)
-            
-            const name = document.getElementById('name').value;
-            alert(`Děkujeme, ${name}! Vaši zprávu jsme přijali. Ozveme se vám co nejdříve.`);
-            
-            this.reset(); // Vymaže formulář
+            e.preventDefault(); // Zastaví klasické odeslání
+
+            const btn = document.getElementById('submitBtn');
+            const originalBtnText = btn.innerText;
+            btn.innerText = "Odesílám...";
+            btn.disabled = true;
+
+            // Získání dat z formuláře
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            // ! DŮLEŽITÉ: Zde vložte URL svého webhooku (např. Make, Zapier, n8n) !
+            const webhookURL = 'SEM_VLOZ_SVUJ_WEBHOOK_URL'; 
+
+            // Odeslání POST requestu
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Děkujeme! Zpráva byla úspěšně odeslána.');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    alert('Chyba při odesílání. Zkuste to prosím později.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Došlo k chybě připojení.');
+            })
+            .finally(() => {
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+            });
         });
     </script>
 
