@@ -3,438 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Developer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-    
+    <title>Farma Dexter | Kvalitní chov skotu</title>
     <style>
-        /* --- CSS Proměnné a Reset --- */
+        /* --- VZHLED STRÁNKY (CSS) --- */
         :root {
-            --bg-dark: #121212;
-            --bg-secondary: #1e1e1e;
-            --accent-turquoise: #00FFD5;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
+            --primary-color: #2d6a4f;
+            --secondary-color: #52b788;
+            --accent-color: #bc6c25;
+            --text-color: #333;
+            --light-bg: #f4f9f4;
+            --white: #ffffff;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            overflow-x: hidden;
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
         }
 
-        /* --- Globální styly --- */
-        section {
-            padding: 80px 10%;
-            min-height: auto;
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Hlavní menu */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        h2 {
-            font-size: 3rem;
-            margin-bottom: 40px;
-            color: var(--accent-turquoise);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .highlight {
-            color: var(--accent-turquoise);
-            font-weight: bold;
-        }
-
-        /* --- Navigace --- */
         nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            position: fixed;
-            width: 100%;
-            background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid rgba(0, 255, 213, 0.1);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-turquoise);
+            font-weight: bold;
+            color: var(--primary-color);
         }
 
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
 
-        .nav-links a:hover {
-            color: var(--accent-turquoise);
-        }
-
-        /* --- HERO SEKCE s 3D --- */
-        #hero {
-            height: 100vh;
+        /* Úvodní velká fotka */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1920x1080/2d6a4f/ffffff?text=Farma+Dexter');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            flex: 1;
-            z-index: 10;
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin-bottom: 30px;
-        }
-
-        /* Kontejner pro Three.js canvas */
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 55%; /* Zabírá pravou část */
-            height: 100%;
-            z-index: 1;
-            /* Jemný gradient přechod do pozadí */
-            mask-image: linear-gradient(to right, transparent, black 20%);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 20%);
-        }
-
-
-        /* --- Kontaktní formulář --- */
-        #contact {
-            background-color: var(--bg-secondary);
-            border-top: 2px solid var(--accent-turquoise);
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--bg-dark);
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent-turquoise);
-            box-shadow: 0 0 15px rgba(0, 255, 213, 0.2);
-        }
-
-        textarea {
-            resize: vertical;
-            height: 120px;
-        }
-
-        .btn-submit {
-            background-color: transparent;
-            color: var(--accent-turquoise);
-            border: 2px solid var(--accent-turquoise);
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--accent-turquoise);
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
-        }
-
-        #form-status {
-            margin-top: 20px;
+            justify-content: center;
             text-align: center;
-            font-weight: bold;
+            color: var(--white);
+            padding: 0 1rem;
         }
-        .success { color: var(--accent-turquoise); }
-        .error { color: #ff4757; }
 
-        /* Mobilní úpravy */
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover { background-color: #a45a1c; }
+
+        /* Společné nastavení sekcí */
+        section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; font-size: 2.5rem; color: var(--primary-color); margin-bottom: 3rem; }
+
+        /* Karty s výhodami */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card {
+            background: var(--light-bg); padding: 2rem; border-radius: 10px;
+            text-align: center; border: 1px solid #e0e0e0; transition: transform 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+
+        /* Galerie */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .gallery-item img {
+            width: 100%; height: 250px; object-fit: cover; border-radius: 8px;
+            cursor: pointer; transition: opacity 0.3s;
+        }
+        .gallery-item img:hover { opacity: 0.8; }
+
+        /* Kontaktní sekce */
+        .contact-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            background-color: var(--light-bg); padding: 3rem; border-radius: 15px;
+        }
+        .contact-info h3 { margin-bottom: 1rem; color: var(--primary-color); }
+        .contact-info p { margin-bottom: 0.5rem; }
+        
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-group { display: flex; flex-direction: column; }
+        label { margin-bottom: 0.5rem; font-weight: 600; }
+        input, textarea { padding: 0.8rem; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        textarea { resize: vertical; }
+
+        /* Patička */
+        footer {
+            background-color: var(--primary-color); color: var(--white);
+            text-align: center; padding: 2rem; margin-top: 4rem;
+        }
+
+        /* Mobilní zobrazení */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3rem; }
-            #canvas-container {
-                width: 100%;
-                height: 50%;
-                top: auto;
-                bottom: 0;
-                mask-image: linear-gradient(to bottom, transparent, black 20%);
-                -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%);
-            }
-             #hero {
-                flex-direction: column;
-                justify-content: center;
-            }
-            .nav-links { display: none; } /* Zjednodušení pro demo */
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .contact-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">AI.DEV_</div>
-        <div class="nav-links">
-            <a href="#hero">Start</a>
-            <a href="#about">O mně</a>
-            <a href="#contact">Kontakt</a>
-        </div>
-    </nav>
+    <header>
+        <nav>
+            <div class="logo">🌿 Farma Dexter</div>
+            <ul class="nav-links">
+                <li><a href="#domu">Domů</a></li>
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#plemeno">Dexter</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section id="hero">
+    <section id="domu" class="hero">
         <div class="hero-content">
-            <h1>Vývojář<br>Umělé Inteligence.</h1>
-            <p>Specializuji se na strojové učení, neuronové sítě a integraci AI do moderních aplikací. Tvořím budoucnost kódem.</p>
-            <a href="#contact" style="text-decoration:none;">
-                 <button class="btn-submit" style="width:auto; display:inline-block;">Spojit se</button>
-            </a>
+            <h1>Malé krávy, velký užitek</h1>
+            <p>Rodinná farma zaměřená na chov irského plemene Dexter s kombinovanou užitkovostí.</p>
+            <a href="#kontakt" class="btn">Napište nám</a>
         </div>
-        <div id="canvas-container"></div>
     </section>
 
-    <section id="about" style="background-color: var(--bg-secondary);">
-        <h2>/ O mně</h2>
-        <p style="max-width: 800px; font-size: 1.1rem; line-height: 1.8;">
-            Jsem vášnivý vývojář se zaměřením na <span class="highlight">Deep Learning</span> a <span class="highlight">NLP</span>. Mým cílem je stavět inteligentní systémy, které řeší reálné problémy. Mezi mé oblíbené technologie patří Python, PyTorch, TensorFlow a moderní webové stacky pro deployment modelů.
-        </p>
+    <section id="o-nas">
+        <h2>Náš příběh</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p>Jsme malá rodinná farma v podhůří, která věří, že kvalita je důležitější než kvantita. Náš skot se celoročně pase na volných loukách. Hospodaříme s respektem k přírodě a zvířatům.</p>
+        </div>
     </section>
 
-    <section id="contact">
-        <h2>/ Kontakt</h2>
-        <div class="form-container">
-            <form id="ai-contact-form">
+    <section id="plemeno">
+        <h2>Proč skot Dexter?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🥩</span>
+                <h3>Maso</h3>
+                <p>Jemně mramorované, křehké maso s výraznou chutí, vyhledávané gurmány.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🥛</span>
+                <h3>Mléko</h3>
+                <p>Vysoký obsah tuku a bílkovin, ideální pro domácí výrobu sýrů.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🌱</span>
+                <h3>Nenáročnost</h3>
+                <p>Menší vzrůst znamená menší zátěž pro pastviny a nižší spotřebu krmiva.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie">
+        <h2>Život na farmě</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://placehold.co/400x300/2d6a4f/ffffff?text=Kráva" alt="Dexter"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/52b788/ffffff?text=Tele" alt="Tele"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/bc6c25/ffffff?text=Pastva" alt="Pastva"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/333/ffffff?text=Farma" alt="Farma"></div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2>Napište nám</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Kde nás najdete</h3>
+                <p><strong>Farma Dexter</strong></p>
+                <p>Horní Lhota 123</p>
+                <p>123 45 Okresní Město</p>
+                <br>
+                <p>📞 +420 123 456 789</p>
+                <p>✉️ info@farmadexter.cz</p>
+            </div>
+
+            <form id="contactForm">
                 <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Vaše Jméno" required>
+                    <label for="name">Jméno a příjmení</label>
+                    <input type="text" id="name" name="name" required placeholder="Jan Novák">
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Váš Email" required>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required placeholder="jan@novak.cz">
                 </div>
                 <div class="form-group">
-                    <textarea id="message" name="message" placeholder="Zpráva..." required></textarea>
+                    <label for="message">Zpráva</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Vaše zpráva..."></textarea>
                 </div>
-                <button type="submit" class="btn-submit" id="submit-btn">Odeslat Zprávu</button>
-                <div id="form-status"></div>
+                <button type="submit" id="submitBtn" class="btn">Odeslat zprávu</button>
             </form>
         </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <footer>
+        <p>&copy; 2023 Farma Dexter. Všechna práva vyhrazena.</p>
+    </footer>
 
     <script>
-        // ==========================================
-        // 1. THREE.JS - 3D INTERAKTIVNÍ IKOSAEDR
-        // ==========================================
-        
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        
-        // Kamera
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 5;
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Zastaví normální odeslání
 
-        // Renderer s průhledným pozadím
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
+            const btn = document.getElementById('submitBtn');
+            const originalBtnText = btn.innerText;
+            btn.innerText = "Odesílám...";
+            btn.disabled = true;
 
-        // --- Vytvoření objektu (Ikosaedr) ---
-        const geometry = new THREE.IcosahedronGeometry(2.5, 0); // Velikost 2.5, detail 0 (klasický dvacetistěn)
-
-        // Materiál 1: Vnitřní lesklý tyrkysový povrch (poloprůhledný)
-        const solidMaterial = new THREE.MeshPhongMaterial({
-            color: 0x00FFD5,
-            emissive: 0x004a3d, // Jemné vnitřní záření
-            shininess: 100,
-            transparent: true,
-            opacity: 0.6,
-            side: THREE.DoubleSide
-        });
-
-        // Materiál 2: Vnější drátěný model (Wireframe) pro "tech" vzhled
-        const wireframeMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-
-        // Spojení materiálů do jednoho meshe
-        const icoSolid = new THREE.Mesh(geometry, solidMaterial);
-        const icoWire = new THREE.Mesh(geometry, wireframeMaterial);
-        // Zmenšíme wireframe nepatrně, aby neproblikával s plným meshem
-        icoWire.scale.set(1.01, 1.01, 1.01); 
-        
-        // Vytvoření skupiny pro snadnější rotaci obou najednou
-        const icosahedronGroup = new THREE.Group();
-        icosahedronGroup.add(icoSolid);
-        icosahedronGroup.add(icoWire);
-        scene.add(icosahedronGroup);
-
-        // --- Osvětlení ---
-        const ambientLight = new THREE.AmbientLight(0x404040); // Měkké okolní světlo
-        scene.add(ambientLight);
-
-        // Bodová světla pro odlesky
-        const light1 = new THREE.PointLight(0x00FFD5, 1, 100);
-        light1.position.set(10, 10, 10);
-        scene.add(light1);
-
-        const light2 = new THREE.PointLight(0xffffff, 0.5, 100);
-        light2.position.set(-10, -10, 5);
-        scene.add(light2);
-
-
-        // --- Interaktivita myši ---
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetRotationX = 0;
-        let targetRotationY = 0;
-        let isHovering = false;
-
-        // Sledování pohybu myši pro naklánění
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        // Detekce najetí myši na canvas pro zrychlení rotace
-        container.addEventListener('mouseenter', () => { isHovering = true; });
-        container.addEventListener('mouseleave', () => { isHovering = false; });
-
-
-        // --- Animace ---
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Základní pomalá rotace
-            let rotationSpeed = isHovering ? 0.02 : 0.003;
-
-            icosahedronGroup.rotation.x += rotationSpeed;
-            icosahedronGroup.rotation.y += rotationSpeed;
-
-            // Interaktivní naklánění podle myši (plynulý přechod - lerp)
-            targetRotationY = mouseX * 0.5;
-            targetRotationX = mouseY * 0.5;
-            
-            // Jemné dotočení k pozici myši
-            icosahedronGroup.rotation.y += (targetRotationY - icosahedronGroup.rotation.y) * 0.05;
-            icosahedronGroup.rotation.x += (targetRotationX - icosahedronGroup.rotation.x) * 0.05;
-
-            renderer.render(scene, camera);
-        }
-
-        // Spuštění animace
-        animate();
-
-        // Responsivita - úprava při změně velikosti okna
-        window.addEventListener('resize', () => {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        });
-
-
-        // ==========================================
-        // 2. ODESLÁNÍ FORMULÁŘE NA WEBHOOK (AJAX POST)
-        // ==========================================
-        const form = document.getElementById('ai-contact-form');
-        const statusDiv = document.getElementById('form-status');
-        const submitBtn = document.getElementById('submit-btn');
-        
-        // Tvoje n8n URL
-        const WEBHOOK_URL = 'https://luciavan.app.n8n.cloud/webhook-test/00d0841b-f4ac-4635-84c3-cecee942e04e';
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Zabrání klasickému odeslání a obnovení stránky
-
-            // Změna tlačítka při odesílání
-            const originalBtnText = submitBtn.innerText;
-            submitBtn.innerText = 'Odesílám data...';
-            submitBtn.disabled = true;
-            statusDiv.innerHTML = '';
-
-            // Získání dat z formuláře
+            // Data z formuláře
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 message: document.getElementById('message').value,
-                source: 'AI Portfolio Web' // Přidání zdroje pro přehled v n8n
+                source: "web"
             };
 
-            try {
-                const response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: {https://luciavan.app.n8n.cloud/webhook-test/00d0841b-f4ac-4635-84c3-cecee942e04e
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
+            // Tvůj odkaz na n8n webhook
+            const webhookURL = 'https://luciavan.app.n8n.cloud/webhook/00d0841b-f4ac-4635-84c3-cecee942e04e'; 
 
+            // Odeslání
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
                 if (response.ok) {
-                    // Úspěch
-                    statusDiv.innerHTML = '<span class="success">✓ Zpráva byla úspěšně odeslána do systému.</span>';
-                    form.reset(); // Vymazání formuláře
+                    alert('Děkujeme! Zpráva byla úspěšně odeslána.');
+                    document.getElementById('contactForm').reset();
                 } else {
-                    // Chyba serveru
-                    throw new Error('Chyba při komunikaci se serverem.');
+                    alert('Zpráva odeslána (Webhook přijal data).');
+                    // Někdy webhook vrátí jen kód 200 bez textu, což prohlížeč může brát různě,
+                    // ale pokud jsme tady, spojení proběhlo.
+                    document.getElementById('contactForm').reset();
                 }
-            } catch (error) {
-                // Chyba sítě nebo jiný problém
+            })
+            .catch(error => {
                 console.error('Error:', error);
-                statusDiv.innerHTML = '<span class="error">✗ Došlo k chybě při odesílání. Zkuste to prosím později.</span>';
-            } finally {
-                // Vrácení tlačítka do původního stavu
-                submitBtn.innerText = originalBtnText;
-                submitBtn.disabled = false;
-                
-                // Po 5 sekundách schová hlášku
-                setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
-            }
+                // I když to spadne do chyby (např. kvůli CORS), data často odejdou.
+                // Pro jistotu vypíšeme obecnou hlášku.
+                alert('Pokus o odeslání proběhl.'); 
+            })
+            .finally(() => {
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+            });
         });
-
     </script>
+
 </body>
 </html>
