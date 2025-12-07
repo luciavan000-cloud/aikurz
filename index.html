@@ -1,27 +1,362 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Photo Sorter - Chytré třídění fotek dětí</title>
-    <meta name="description" content="Automatické třídění a čištění fotek z mobilu. Najděte nejlepší snímky dětí z tisíců podobných fotek." />
-    <meta name="author" content="Smart Photo Sorter" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farma Dexter | Kvalitní chov skotu</title>
+    <style>
+        /* --- ZÁKLADNÍ NASTAVENÍ A PROMĚNNÉ --- */
+        :root {
+            --primary-color: #2d6a4f; /* Tmavě zelená */
+            --secondary-color: #52b788; /* Světlejší zelená */
+            --accent-color: #bc6c25; /* Zemitá hnědá */
+            --text-color: #333;
+            --light-bg: #f4f9f4;
+            --white: #ffffff;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    <meta property="og:title" content="Smart Photo Sorter" />
-    <meta property="og:description" content="Automatické třídění a čištění fotek z mobilu. Najděte nejlepší snímky dětí." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@SmartPhotoSorter" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    
-    <link rel="canonical" href="https://smartphotosorter.app" />
-  </head>
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- NAVIGACE --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO SEKCE (Úvodní banner) --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1920x1080/2d6a4f/ffffff?text=Farma+Dexter');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #a45a1c;
+        }
+
+        /* --- OBECNÉ SEKCE --- */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        /* --- SEKCE O PLEMENI (Karty) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- GALERIE --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item img:hover {
+            opacity: 0.8;
+        }
+
+        /* --- KONTAKTNÍ FORMULÁŘ --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background-color: var(--light-bg);
+            padding: 3rem;
+            border-radius: 15px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* --- PATIČKA --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* --- RESPONZIVITA --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Zjednodušení pro demo - zde by byl hamburger menu */
+            .contact-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">🌿 Farma Dexter</div>
+            <ul class="nav-links">
+                <li><a href="#domu">Domů</a></li>
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#plemeno">Dexter</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="domu" class="hero">
+        <div class="hero-content">
+            <h1>Malé krávy, velký užitek</h1>
+            <p>Rodinná farma zaměřená na chov irského plemene Dexter v souladu s přírodou.</p>
+            <a href="#kontakt" class="btn">Mám zájem o maso / chov</a>
+        </div>
+    </section>
+
+    <section id="o-nas">
+        <h2>Náš příběh</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p>Jsme malá rodinná farma v podhůří, která věří, že kvalita je důležitější než kvantita. Náš skot se celoročně pase na volných loukách, což zaručuje nejen spokojený život zvířat, ale i prvotřídní kvalitu masa a mléka. Hospodaříme v režimu ekologického zemědělství.</p>
+        </div>
+    </section>
+
+    <section id="plemeno">
+        <h2>Proč skot Dexter?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🥩</span>
+                <h3>Excelentní maso</h3>
+                <p>Maso je jemně mramorované, křehké a má specifickou, výraznou chuť, kterou gurmáni vyhledávají.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🥛</span>
+                <h3>Kvalitní mléko</h3>
+                <p>Vysoký obsah tuku a bílkovin. Ideální pro výrobu domácích sýrů a mléčných výrobků.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🌱</span>
+                <h3>Nenáročnost</h3>
+                <p>Díky menšímu vzrůstu neničí pastviny a stačí jim méně krmiva než velkým plemenům.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie">
+        <h2>Život na farmě</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://placehold.co/400x300/2d6a4f/ffffff?text=Kráva+na+pastvě" alt="Dexter na pastvě"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/52b788/ffffff?text=Tele" alt="Tele Dexter"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/bc6c25/ffffff?text=Naše+maso" alt="Maso"></div>
+            <div class="gallery-item"><img src="https://placehold.co/400x300/333/ffffff?text=Farma" alt="Farma"></div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2>Napište nám</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Kde nás najdete</h3>
+                <p><strong>Farma Dexter</strong></p>
+                <p>Horní Lhota 123</p>
+                <p>123 45 Okresní Město</p>
+                <br>
+                <p>📞 +420 123 456 789</p>
+                <p>✉️ info@farmadexter.cz</p>
+                <br>
+                <p><em>Osobní odběr masa je možný po telefonické domluvě.</em></p>
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Jméno a příjmení</label>
+                    <input type="text" id="name" name="name" required placeholder="Jan Novák">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required placeholder="jan@novak.cz">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Předmět</label>
+                    <select id="subject" name="subject">
+                        <option value="maso">Zájem o maso (bedýnky)</option>
+                        <option value="zvirata">Zájem o chovná zvířata</option>
+                        <option value="jine">Jiný dotaz</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Zpráva</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Dobrý den, měl bych zájem o..."></textarea>
+                </div>
+                <button type="submit" class="btn">Odeslat zprávu</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Farma Dexter. Všechna práva vyhrazena.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Zabrání skutečnému odeslání (reloadu) stránky
+            
+            // Zde by byl kód pro odeslání na server (např. přes PHP nebo službu jako Formspree)
+            
+            const name = document.getElementById('name').value;
+            alert(`Děkujeme, ${name}! Vaši zprávu jsme přijali. Ozveme se vám co nejdříve.`);
+            
+            this.reset(); // Vymaže formulář
+        });
+    </script>
+
+</body>
 </html>
-
