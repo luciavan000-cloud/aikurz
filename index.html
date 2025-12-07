@@ -384,7 +384,7 @@
         const submitBtn = document.getElementById('submit-btn');
         
         // Tvoje n8n URL
-        const WEBHOOK_URL = 'https://luciavan.app.n8n.cloud/webhook/00d0841b-f4ac-4635-84c3-cecee942e04e';
+        const WEBHOOK_URL = 'https://luciavan.app.n8n.cloud/webhook-test/00d0841b-f4ac-4635-84c3-cecee942e04e';
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // Zabrání klasickému odeslání a obnovení stránky
@@ -406,7 +406,7 @@
             try {
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
-                    headers: {
+                    headers: {https://luciavan.app.n8n.cloud/webhook-test/00d0841b-f4ac-4635-84c3-cecee942e04e
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
